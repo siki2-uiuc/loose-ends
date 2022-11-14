@@ -1,0 +1,43 @@
+<div>
+  <div>
+    <h2>
+      Edit pet
+    </h2>
+
+    <form action="/pets/<%= @pet.id %>"  method="post" >
+
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+
+      <%# For creating Patch CRUD operations %>
+      <input type="hidden" name="_method" value="patch" >
+
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name" value="<%= @pet.name %>">
+      </div>
+
+      <div>
+        <label for="age_box">
+          Age
+        </label>
+
+        <input type="text" id="age_box" name="query_age" value="<%= @pet.age %>">
+      </div>
+
+      <div>
+        <label for="species_id_box">
+          Species
+        </label>
+
+        <input type="text" id="species_id_box" name="query_species_id" value="<%= @pet.species_id %>">
+      </div>
+
+      <button>
+        Update pet
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<div>
+  <div>
+    <h1>
+      Pet #<%= @pet.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/pets">
+          Go back
+        </a>
+      </div>
+
+      <div>
+      <%# Rails reserves "data-method=delete" b/c HTML doesn't support delete method  %>
+        <a href="/pets/<%= @pet.id %>" data-method="delete">
+          Delete pet
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <a href="/pets/<%= @pet.id %>/edit">Edit pet</a>
+    </div>
+
+    <dl>
+      <dt>
+        Name
+      </dt>
+      <dd>
+        <%= @pet.name %>
+      </dd>
+
+      <dt>
+        Age
+      </dt>
+      <dd>
+        <%= @pet.age %>
+      </dd>
+
+      <dt>
+        Species
+      </dt>
+      <dd>
+        <%= @pet.species_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@pet.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@pet.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
