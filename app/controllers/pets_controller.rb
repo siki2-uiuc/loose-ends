@@ -18,6 +18,23 @@ class PetsController < ApplicationController
     matching_pets = Pet.all
 
     @list_of_pets = matching_pets.order({ :created_at => :desc })
+    
+
+    respond_to do |format|
+      # Implicitly happening
+      
+      format.html do
+        render("pets/index.html.erb")
+      end
+
+      format.json do 
+        render json: @list_of_pets
+      end
+
+    end
+
+
+
 
     # render({ :template => "pets/index.html.erb" })
   end
@@ -47,10 +64,13 @@ class PetsController < ApplicationController
   end
 
   def create
-    @pet = Pet.new
-    @pet.name = params.fetch("query_name")
-    @pet.age = params.fetch("query_age")
-    @pet.species_id = params.fetch("query_species_id")
+    # @pet = Pet.new
+    # @pet.name = params.fetch(:name)
+    # @pet.age = params.fetch(:age)
+    # @pet.species_id = params.fetch(:species_id)
+
+    pet_params = params.require(:pet_attributes).permit(:age, :name, :species_id)
+    @pet = Pet.new(pet_params)
 
     if @pet.valid?
       @pet.save
@@ -64,17 +84,21 @@ class PetsController < ApplicationController
 
   def update
     # the_id = params.fetch("path_id")
-    @pet = Pet.find(params.fetch("id"))
+    # @pet = Pet.find(params.fetch("id"))
 
-    @pet.name = params.fetch("query_name")
-    @pet.age = params.fetch("query_age")
-    @pet.species_id = params.fetch("query_species_id")
+    # @pet.name = params.fetch("query_name")
+    # @pet.age = params.fetch("query_age")
+    # @pet.species_id = params.fetch("query_species_id")
+
+    pet_params = params.require(:pet).permit(:age, :name, :species_id)
+
+    @pet.update(pet_params)
 
     if @pet.valid?
       @pet.save
       redirect_to("/pets/#{@pet.id}", { :notice => "Pet updated successfully."} )
     else
-      redirect_to("/pets/#{@pet.id}", { :alert => @pet.errors.full_messages.to_sentence })
+      render("edit")
     end
   end
 

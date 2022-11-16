@@ -1,0 +1,38 @@
+<%= form_with model: @pet do |form| %>
+    <div>
+        <%# <label for="name_box">
+          Name
+        </label> %>
+
+        <%= form.label :name %>
+
+        <%# <input type="text" id="name_box" name="query_name" value="<%= @pet.name %>
+        <%= form.text_field :name %>
+      </div>
+
+      <div>
+        <%# <label for="age">
+          Age
+        </label> %>
+
+        <%= form.label :age %>
+
+        <%= form.text_field :age%>
+        <%# <input type="text" id="age" name="age" value="<%= @pet.age %>
+      </div>
+
+      <div>
+        <%# <label for="species_id_box">
+          Species
+        </label> %>
+
+        <%= label_tag :species_id %>
+
+        <%# <input type="text" id="species_id_box" name="query_species_id"> %>
+        <%= text_field_tag :species_id %>
+      </div>
+
+      <%= form.submit %>
+    </form>
+  
+ <% end %>

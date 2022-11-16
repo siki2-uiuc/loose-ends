@@ -6,21 +6,22 @@
 
     <div>
       <div>
-        <a href="/pets">
+        <%# <a href="/pets">
           Go back
-        </a>
+        </a> %>
+        <%= link_to "Go back", pets_path %>
       </div>
 
       <div>
       <%# Rails reserves "data-method=delete" b/c HTML doesn't support delete method  %>
-        <a href="/pets/<%= @pet.id %>" data-method="delete">
-          Delete pet
-        </a>
+      <%# data: {confirm} creates an alert to confirm the action being taken %>
+        <%= link_to "Delete pet", pet_path(@pet.id), method: :delete, data: { confirm: "Are you sure?"} %>
       </div>
     </div>
 
     <div>
-      <a href="/pets/<%= @pet.id %>/edit">Edit pet</a>
+      
+      <%= link_to "Edit pet", edit_pet_path(@pet) %>
     </div>
 
     <dl>
